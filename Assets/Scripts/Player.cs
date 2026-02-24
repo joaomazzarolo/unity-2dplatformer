@@ -1,0 +1,65 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using DG.Tweening;
+
+public class Player : MonoBehaviour
+{
+    public Rigidbody2D myRigidBody;
+
+    public Vector2 velocity;
+    public float speed = 5;
+    public float runSpeed = 15;
+    public float jumpForce = 20;
+    public Vector2 friction = new Vector2(.1f, 0);
+
+    public float jumpScaleY = 1.5f;
+    public float jumpScaleX = .7f;
+    public float animationDuration = .3f;
+    public Ease ease = Ease.OutBack;
+
+    void Update()
+    {
+        HandleMovement();
+        HandleJump();
+    }
+
+    private void HandleMovement()
+    {
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            myRigidBody.velocity = new Vector2(Input.GetKey(KeyCode.LeftShift) ? -runSpeed : -speed, myRigidBody.velocity.y);
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            myRigidBody.velocity = new Vector2(Input.GetKey(KeyCode.LeftShift) ? runSpeed : speed, myRigidBody.velocity.y);
+        }
+
+        if (myRigidBody.velocity.x > 0)
+        {
+            myRigidBody.velocity += friction * -1;
+        }
+        else if (myRigidBody.velocity.x < 0)
+        {
+            myRigidBody.velocity -= friction * -1;
+        }
+    }
+
+    private void HandleJump()
+    {
+        if (Input.GetKey(KeyCode.Space) && myRigidBody.velocity.y == 0)
+        {
+            myRigidBody.velocity = Vector2.up * jumpForce;
+            myRigidBody.transform.localScale = Vector2.one;
+
+            DOTween.Kill(myRigidBody.transform);
+            HandleScaleJump();
+        }
+    }
+
+    private void HandleScaleJump()
+    {
+        myRigidBody.transform.DOScaleY(jumpScaleY, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
+        myRigidBody.transform.DOScaleX(jumpScaleX, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
+    }
+}
