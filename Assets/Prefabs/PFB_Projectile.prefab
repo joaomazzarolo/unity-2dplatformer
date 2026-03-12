@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8d9dde54a4edd478b71fb7870e297a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 15, y: 0, z: 0}
+  direction: {x: 25, y: 0, z: 0}
   timeToDestroy: 2
   side: 1
-  damageAmount: 1
+  damageAmount: 2
 --- !u!58 &-8937794071737659013
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.24818254
+  m_Radius: 0.2
 --- !u!1 &4622500125071383829
 GameObject:
   m_ObjectHideFlags: 0

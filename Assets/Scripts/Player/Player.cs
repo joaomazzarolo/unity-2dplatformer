@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
 
 
-    public float jumpScaleY = 1.5f;
+    public float jumpScaleY = 1.3f;
     public float jumpScaleX = .7f;
     public float animationDuration = .3f;
     public Ease ease = Ease.OutBack;
