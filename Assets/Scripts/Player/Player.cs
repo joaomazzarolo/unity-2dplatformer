@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     public Animator animator;
     public string boolRun = "Run";
+    public string triggerDeath = "Death";
 
 
 
@@ -22,6 +23,21 @@ public class Player : MonoBehaviour
     public float jumpScaleX = .7f;
     public float animationDuration = .3f;
     public Ease ease = Ease.OutBack;
+
+    public HealthBase healthBase;
+    private void Awake()
+    {
+        if(healthBase != null)
+        {
+            healthBase.OnKill += OnPlayerDeath;
+        }
+    }
+
+    private void OnPlayerDeath()
+    {
+        healthBase.OnKill -= OnPlayerDeath;
+        animator.SetTrigger(triggerDeath);
+    }
 
     void Update()
     {
@@ -82,5 +98,10 @@ public class Player : MonoBehaviour
     {
         myRigidBody.transform.DOScaleY(jumpScaleY, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
         myRigidBody.transform.DOScaleX(jumpScaleX, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
+    }
+
+    public void DestroyMe()
+    {
+        Destroy(gameObject);
     }
 }

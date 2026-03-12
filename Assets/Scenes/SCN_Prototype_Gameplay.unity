@@ -162,6 +162,19 @@ MonoBehaviour:
   - {fileID: 627671343}
   color: {r: 1, g: 0, b: 0, a: 1}
   duration: 0.3
+--- !u!114 &7990804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7990802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f11172515a3319409f23eb2d08ed57d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 215113784}
 --- !u!95 &25509138 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6413013834153556191, guid: 00afc9fb4087652419d090da0b825d97, type: 3}
@@ -351,10 +364,12 @@ MonoBehaviour:
   friction: {x: 0.1, y: 0}
   animator: {fileID: 25509138}
   boolRun: Run
+  triggerDeath: Death
   jumpScaleY: 1.5
   jumpScaleX: 0.7
   animationDuration: 0.3
   ease: 27
+  healthBase: {fileID: 215113789}
 --- !u!61 &215113785
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -441,7 +456,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startLife: 10
-  destroyOnKill: 1
+  destroyOnKill: 0
+  delayToKill: 0
   _currentLife: 0
   _flashColor: {fileID: 7990803}
 --- !u!212 &260871794 stripped
@@ -2973,6 +2989,8 @@ MonoBehaviour:
   damage: 2
   animator: {fileID: 337017275}
   triggerAttack: Attack
+  triggerDeath: Death
+  timeToDestroy: 2
   healthbase: {fileID: 1528319904}
 --- !u!4 &1528319902
 Transform:
@@ -3023,7 +3041,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startLife: 10
-  destroyOnKill: 1
+  destroyOnKill: 0
+  delayToKill: 0
   _currentLife: 0
   _flashColor: {fileID: 0}
 --- !u!114 &1528319905
