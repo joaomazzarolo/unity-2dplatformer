@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Ebac.Singleton;
 
 public class ItemManager : MonoBehaviour
 {
 
     public static ItemManager Instance;
     public TextMeshProUGUI collectedCoins;
-    public int coins;
+    public SOInt coins;
 
     private void Awake()
     {
@@ -24,13 +25,19 @@ public class ItemManager : MonoBehaviour
     }
     private void Reset()
     {
-        coins = 0;
-        collectedCoins.text = "x " + coins.ToString();
+        coins.value = 0;
+        //collectedCoins.text = "x " + coins.ToString();
     }
 
     public void AddCoins(int amount = 1)
     {
-        coins += amount;
-        collectedCoins.text = "x " + coins.ToString();
+        coins.value += amount;
+        //collectedCoins.text = "x " + coins.ToString();
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        //UIInGameManager.Instance.UpdateTextCoins(coins.ToString());
     }
 }
