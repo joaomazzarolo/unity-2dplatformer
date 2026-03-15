@@ -10,6 +10,8 @@ public class ItemManager : MonoBehaviour
     public static ItemManager Instance;
     public TextMeshProUGUI collectedCoins;
     public SOInt coins;
+    public SOInt planets;
+    public TextMeshProUGUI collectedPlanets;
 
     private void Awake()
     {
@@ -26,18 +28,16 @@ public class ItemManager : MonoBehaviour
     private void Reset()
     {
         coins.value = 0;
-        //collectedCoins.text = "x " + coins.ToString();
+        planets.value = 0;
     }
 
     public void AddCoins(int amount = 1)
     {
         coins.value += amount;
-        //collectedCoins.text = "x " + coins.ToString();
-        UpdateUI();
     }
 
-    private void UpdateUI()
+    public void AddPlanets(int amount = 1)
     {
-        //UIInGameManager.Instance.UpdateTextCoins(coins.ToString());
+        planets.value += amount;
     }
 }
