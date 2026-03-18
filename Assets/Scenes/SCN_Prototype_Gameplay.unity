@@ -5917,6 +5917,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!198 &1867961908 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1162887965484385978, guid: 6be3cf2b8332f4847ba8c7ed228d4370, type: 3}
+  m_PrefabInstance: {fileID: 2416296713132685850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1877822786
 GameObject:
   m_ObjectHideFlags: 0
@@ -6568,6 +6573,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 2309255082520958073, guid: 6be3cf2b8332f4847ba8c7ed228d4370, type: 3}
+      propertyPath: particleSystem
+      value: 
+      objectReference: {fileID: 1867961908}
     - target: {fileID: 2416296711169067300, guid: 6be3cf2b8332f4847ba8c7ed228d4370, type: 3}
       propertyPath: m_Name
       value: PFB_Coin
