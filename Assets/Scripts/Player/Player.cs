@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public Vector2 velocity;
     public HealthBase healthBase;
     private Animator _currentPlayer;
+    public ParticleSystem jumpVFX;
+    public GameObject jumpVFXObject;
 
     [Header("Setup")]
     public SOPlayerSetup soPlayerSetup;
@@ -20,6 +22,8 @@ public class Player : MonoBehaviour
             healthBase.OnKill += OnPlayerDeath;
         }
         _currentPlayer = Instantiate(soPlayerSetup.player, transform);
+
+        jumpVFXObject.SetActive(true);
     }
 
     private void OnPlayerDeath()
@@ -77,9 +81,11 @@ public class Player : MonoBehaviour
         {
             myRigidBody.velocity = Vector2.up * soPlayerSetup.jumpForce;
             myRigidBody.transform.localScale = Vector2.one;
-
+            //PlayerJumpVFX();
+            jumpVFX.Play();
             DOTween.Kill(myRigidBody.transform);
             HandleScaleJump();
+
         }
     }
 
@@ -87,6 +93,12 @@ public class Player : MonoBehaviour
     {
         myRigidBody.transform.DOScaleY(soPlayerSetup.jumpScaleY, soPlayerSetup.animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(soPlayerSetup.ease);
         myRigidBody.transform.DOScaleX(soPlayerSetup.jumpScaleX, soPlayerSetup.animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(soPlayerSetup.ease);
+    }
+
+    private void PlayerJumpVFX()
+    {
+        if (jumpVFX != null) jumpVFX.Play();
+        Debug.Log("chegou função");
     }
 
     public void DestroyMe()
