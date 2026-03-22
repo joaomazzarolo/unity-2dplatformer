@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     private Animator _currentPlayer;
     public ParticleSystem jumpVFX;
     public GameObject jumpVFXObject;
+    public ParticleSystem runVFX;
+    public GameObject runVFXObject;
 
     [Header("Setup")]
     public SOPlayerSetup soPlayerSetup;
@@ -24,6 +26,7 @@ public class Player : MonoBehaviour
         _currentPlayer = Instantiate(soPlayerSetup.player, transform);
 
         jumpVFXObject.SetActive(true);
+        runVFXObject.SetActive(true);
     }
 
     private void OnPlayerDeath()
@@ -51,6 +54,7 @@ public class Player : MonoBehaviour
                 myRigidBody.transform.DOScaleX(-1, .1f);
             }
             myRigidBody.velocity = new Vector2(Input.GetKey(KeyCode.LeftShift) ? -soPlayerSetup.runSpeed : -soPlayerSetup.speed, myRigidBody.velocity.y);
+            PlayRunVFX();
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -60,7 +64,9 @@ public class Player : MonoBehaviour
                 myRigidBody.transform.DOScaleX(1, .1f);
             }
             myRigidBody.velocity = new Vector2(Input.GetKey(KeyCode.LeftShift) ? soPlayerSetup.runSpeed : soPlayerSetup.speed, myRigidBody.velocity.y);
-        }else
+            PlayRunVFX();
+        }
+        else
         {
             _currentPlayer.SetBool(soPlayerSetup.boolRun, false);
         }
@@ -81,7 +87,6 @@ public class Player : MonoBehaviour
         {
             myRigidBody.velocity = Vector2.up * soPlayerSetup.jumpForce;
             myRigidBody.transform.localScale = Vector2.one;
-            //PlayerJumpVFX();
             jumpVFX.Play();
             DOTween.Kill(myRigidBody.transform);
             HandleScaleJump();
@@ -95,12 +100,10 @@ public class Player : MonoBehaviour
         myRigidBody.transform.DOScaleX(soPlayerSetup.jumpScaleX, soPlayerSetup.animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(soPlayerSetup.ease);
     }
 
-    private void PlayerJumpVFX()
+    private void PlayRunVFX()
     {
-        if (jumpVFX != null) jumpVFX.Play();
-        Debug.Log("chegou função");
+        runVFX.Play();
     }
-
     public void DestroyMe()
     {
         Destroy(gameObject);
