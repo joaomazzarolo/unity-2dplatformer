@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public GameObject jumpVFXObject;
     public ParticleSystem runVFX;
     public GameObject runVFXObject;
+    public AudioSource jumpSFX;
 
     [Header("Setup")]
     public SOPlayerSetup soPlayerSetup;
@@ -88,6 +89,7 @@ public class Player : MonoBehaviour
             myRigidBody.velocity = Vector2.up * soPlayerSetup.jumpForce;
             myRigidBody.transform.localScale = Vector2.one;
             jumpVFX.Play();
+            jumpSFX.Play();
             DOTween.Kill(myRigidBody.transform);
             HandleScaleJump();
 
